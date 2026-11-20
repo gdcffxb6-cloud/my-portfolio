@@ -1,359 +1,531 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>แนะนำตัว - นายปิยะอังกูร แก้วศรีงาม</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600;700;800&display=swap" rel="stylesheet">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Kanit', sans-serif;
-            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
-            min-height: 100vh;
-            color: #fff;
-            overflow-x: hidden;
-        }
-
-        /* Animated background particles */
-        .particles {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 0;
-        }
-
-        .particle {
-            position: absolute;
-            width: 4px;
-            height: 4px;
-            background: rgba(255, 255, 255, 0.3);
-            border-radius: 50%;
-            animation: float linear infinite;
-        }
-
-        @keyframes float {
-            0% {
-                transform: translateY(100vh) rotate(0deg);
-                opacity: 0;
-            }
-            10% {
-                opacity: 1;
-            }
-            90% {
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(-10vh) rotate(720deg);
-                opacity: 0;
-            }
-        }
-
-        /* Hero Section */
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            z-index: 1;
-            padding: 2rem;
-        }
-
-        .hero-content {
-            text-align: center;
-            animation: fadeInUp 1s ease-out;
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(40px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Profile Image */
-        .profile-container {
-            position: relative;
-            display: inline-block;
-            margin-bottom: 2rem;
-        }
-
-        .profile-ring {
-            width: 220px;
-            height: 220px;
-            border-radius: 50%;
-            padding: 5px;
-            background: linear-gradient(45deg, #f093fb, #f5576c, #4facfe, #00f2fe);
-            background-size: 400% 400%;
-            animation: gradientSpin 3s ease infinite;
-        }
-
-        @keyframes gradientSpin {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        .profile-img {
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 4px solid #1a1a2e;
-        }
-
-        .profile-container::after {
-            content: '🍳';
-            position: absolute;
-            bottom: 10px;
-            right: 10px;
-            font-size: 2.5rem;
-            animation: bounce 2s ease infinite;
-        }
-
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
-
-        /* Name & Title */
-        .name {
-            font-size: 3rem;
-            font-weight: 800;
-            background: linear-gradient(90deg, #f093fb, #f5576c, #4facfe);
-            background-size: 200% auto;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            animation: shimmer 3s linear infinite;
-            margin-bottom: 0.5rem;
-        }
-
-        @keyframes shimmer {
-            to { background-position: 200% center; }
-        }
-
-        .subtitle {
-            font-size: 1.3rem;
-            font-weight: 300;
-            color: rgba(255, 255, 255, 0.7);
-            margin-bottom: 2rem;
-        }
-
-        .subtitle .emoji {
-            font-size: 1.5rem;
-        }
-
-        /* Info Cards */
-        .cards {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 1.5rem;
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 0 1rem;
-        }
-
-        .card {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 20px;
-            padding: 2rem;
-            width: 260px;
-            transition: all 0.3s ease;
-            animation: fadeInUp 1s ease-out both;
-        }
-
-        .card:nth-child(1) { animation-delay: 0.2s; }
-        .card:nth-child(2) { animation-delay: 0.4s; }
-        .card:nth-child(3) { animation-delay: 0.6s; }
-
-        .card:hover {
-            transform: translateY(-10px);
-            background: rgba(255, 255, 255, 0.1);
-            border-color: rgba(245, 87, 108, 0.5);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-        }
-
-        .card-icon {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-        }
-
-        .card-title {
-            font-size: 1.1rem;
-            font-weight: 600;
-            color: #f5576c;
-            margin-bottom: 0.5rem;
-        }
-
-        .card-text {
-            font-size: 1rem;
-            font-weight: 300;
-            color: rgba(255, 255, 255, 0.8);
-            line-height: 1.6;
-        }
-
-        /* Fun Fact Section */
-        .fun-section {
-            text-align: center;
-            padding: 4rem 2rem;
-            position: relative;
-            z-index: 1;
-        }
-
-        .fun-title {
-            font-size: 2rem;
-            font-weight: 700;
-            margin-bottom: 2rem;
-        }
-
-        .egg-animation {
-            font-size: 5rem;
-            display: inline-block;
-            animation: sizzle 0.5s ease infinite alternate;
-        }
-
-        @keyframes sizzle {
-            from { transform: rotate(-5deg) scale(1); }
-            to { transform: rotate(5deg) scale(1.05); }
-        }
-
-        .fun-text {
-            font-size: 1.3rem;
-            font-weight: 300;
-            color: rgba(255, 255, 255, 0.8);
-            max-width: 600px;
-            margin: 1rem auto 0;
-            line-height: 1.8;
-        }
-
-        /* Footer */
-        .footer {
-            text-align: center;
-            padding: 2rem;
-            color: rgba(255, 255, 255, 0.3);
-            font-size: 0.9rem;
-            position: relative;
-            z-index: 1;
-        }
-
-        .footer a {
-            color: #f5576c;
-            text-decoration: none;
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .name {
-                font-size: 2rem;
-            }
-            .profile-ring {
-                width: 170px;
-                height: 170px;
-            }
-            .cards {
-                flex-direction: column;
-                align-items: center;
-            }
-            .card {
-                width: 100%;
-                max-width: 320px;
-            }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ระบบ POS - บริหารจัดการคำสั่งซื้อและคลังสินค้าหน้าร้าน</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script crossorigin src="https://unpkg.com/@mui/material@5/umd/material-ui.production.min.js"></script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Kanit', sans-serif; background: #f0f2f5; }
+    #root { min-height: 100vh; }
+    .emoji-media { height: 120px; display: flex; align-items: center; justify-content: center; font-size: 3.5rem; user-select: none; }
+    .receipt-box { font-family: 'Courier New', monospace; font-size: 13px; background: #fff; padding: 20px; border: 2px dashed #ccc; border-radius: 8px; white-space: pre-line; line-height: 1.6; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+    .fade-in { animation: fadeIn 0.4s ease-out; }
+    .low-stock-pulse { animation: pulse 1.5s ease-in-out infinite; }
+    @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.5; } }
+  </style>
 </head>
 <body>
-    <!-- Animated Particles Background -->
-    <div class="particles" id="particles"></div>
+<div id="root"></div>
+<script type="text/babel">
+const { useState, useMemo, useCallback, useEffect } = React;
+const {
+  ThemeProvider, createTheme, CssBaseline,
+  AppBar, Toolbar, Typography, Badge, IconButton, Button,
+  Container, Grid, Box, Paper,
+  Card, CardContent, CardActions,
+  Table, TableBody, TableCell, TableContainer, TableHead, TableRow,
+  TextField, Switch, FormControlLabel,
+  Snackbar, Alert, LinearProgress,
+  Drawer, Dialog, DialogTitle, DialogContent, DialogActions,
+  Divider, Chip, Tooltip, Stack
+} = MaterialUI;
 
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="hero-content">
-            <div class="profile-container">
-                <div class="profile-ring">
-                    <img src="profile.jpg" alt="รูปโปรไฟล์ของปิยะอังกูร" class="profile-img">
-                </div>
-            </div>
-            <h1 class="name">นายปิยะอังกูร แก้วศรีงาม</h1>
-            <p class="subtitle">
-                <span class="emoji">👦</span> เด็กหนุ่มวัย 15 ปี ผู้หลงรักไข่เจียว <span class="emoji">🍳</span>
-            </p>
+// =================== THEME ===================
+const theme = createTheme({
+  palette: {
+    primary: { main: '#1565c0' },
+    secondary: { main: '#ff6f00' },
+    success: { main: '#2e7d32' },
+    warning: { main: '#ed6c02' },
+    error: { main: '#d32f2f' },
+  },
+  typography: { fontFamily: "'Kanit', sans-serif" },
+  shape: { borderRadius: 12 },
+});
 
-            <!-- Info Cards -->
-            <div class="cards">
-                <div class="card">
-                    <div class="card-icon">👤</div>
-                    <div class="card-title">เกี่ยวกับฉัน</div>
-                    <div class="card-text">
-                        สวัสดีครับ! ผมชื่อ <strong>ปิยะอังกูร แก้วศรีงาม</strong> อายุ 15 ปี เป็นคนร่าเริง สดใส ชอบทำอาหาร โดยเฉพาะไข่เจียว!
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-icon">🍳</div>
-                    <div class="card-title">อาหารโปรด</div>
-                    <div class="card-text">
-                        <strong>ไข่เจียว</strong> คือเมนูที่ผมรักที่สุด! ไม่ว่าจะไข่เจียวหมูสับ ไข่เจียวปู หรือไข่เจียวธรรมดา ผมกินได้ทุกมื้อ!
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-icon">✨</div>
-                    <div class="card-title">ความฝัน</div>
-                    <div class="card-text">
-                        อยากเป็นเชฟไข่เจียวระดับโลก! สร้างสรรค์เมนูไข่เจียวสูตรใหม่ๆ ให้คนทั่วโลกได้ลิ้มลอง
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+// =================== DATA ===================
+const INITIAL_PRODUCTS = [
+  { id: 1, name: 'ข้าวกะเพราหมูสับไข่ดาว', price: 50, stock: 20, maxStock: 20, emoji: '🍛', category: 'อาหาร', active: true },
+  { id: 2, name: 'น้ำดื่ม Crystal 600ml', price: 10, stock: 50, maxStock: 50, emoji: '💧', category: 'เครื่องดื่ม', active: true },
+  { id: 3, name: 'มาม่า รสต้มยำกุ้ง', price: 8, stock: 3, maxStock: 30, emoji: '🍜', category: 'อาหาร', active: true },
+  { id: 4, name: 'โค้ก 325ml', price: 18, stock: 25, maxStock: 25, emoji: '🥤', category: 'เครื่องดื่ม', active: true },
+  { id: 5, name: 'เลย์ รสสาหร่าย', price: 30, stock: 4, maxStock: 24, emoji: '🥔', category: 'ขนม', active: true },
+  { id: 6, name: 'กาแฟ Birdy 180ml', price: 15, stock: 30, maxStock: 30, emoji: '☕', category: 'เครื่องดื่ม', active: true },
+  { id: 7, name: 'ขนมปัง ฟาร์มเฮ้าส์', price: 35, stock: 2, maxStock: 20, emoji: '🍞', category: 'ขนม', active: true },
+  { id: 8, name: 'นมหนองโพ 225ml', price: 14, stock: 15, maxStock: 30, emoji: '🥛', category: 'เครื่องดื่ม', active: true },
+  { id: 9, name: 'ปลาหมึกทอดกรอบ', price: 25, stock: 8, maxStock: 15, emoji: '🦑', category: 'อาหาร', active: true },
+  { id: 10, name: 'ไส้กรอกอีสาน', price: 15, stock: 12, maxStock: 20, emoji: '🌭', category: 'อาหาร', active: true },
+  { id: 11, name: 'โปเต้ รสซาวครีม', price: 22, stock: 6, maxStock: 18, emoji: '🍟', category: 'ขนม', active: true },
+  { id: 12, name: 'ชาเขียว Oishi 380ml', price: 20, stock: 18, maxStock: 24, emoji: '🍵', category: 'เครื่องดื่ม', active: true },
+];
 
-    <!-- Fun Fact Section -->
-    <section class="fun-section">
-        <h2 class="fun-title">🥚 Fun Fact 🥚</h2>
-        <div class="egg-animation">🍳</div>
-        <p class="fun-text">
-            ผมกินไข่เจียวมาแล้วมากกว่า <strong>1,000 ฟอง</strong> ในชีวิต!<br>
-            และยังไม่มีวันเบื่อ... เพราะไข่เจียวคือชีวิต! 💛
-        </p>
-    </section>
+const DISCOUNT_CODES = {
+  'SALE10': { percent: 10, label: 'ลด 10%' },
+  'VIP20': { percent: 20, label: 'สมาชิก VIP ลด 20%' },
+  'NEWCUST': { percent: 15, label: 'ลูกค้าใหม่ ลด 15%' },
+};
 
-    <!-- Footer -->
-    <footer class="footer">
-        <p>© 2026 นายปิยะอังกูร แก้วศรีงาม | Made with 💛 and 🍳</p>
-    </footer>
+const GRADIENTS = [
+  'linear-gradient(135deg, #667eea, #764ba2)',
+  'linear-gradient(135deg, #f093fb, #f5576c)',
+  'linear-gradient(135deg, #4facfe, #00f2fe)',
+  'linear-gradient(135deg, #43e97b, #38f9d7)',
+  'linear-gradient(135deg, #fa709a, #fee140)',
+  'linear-gradient(135deg, #a18cd1, #fbc2eb)',
+  'linear-gradient(135deg, #fccb90, #d57eeb)',
+  'linear-gradient(135deg, #e0c3fc, #8ec5fc)',
+  'linear-gradient(135deg, #f5576c, #ff6f00)',
+  'linear-gradient(135deg, #667eea, #43e97b)',
+  'linear-gradient(135deg, #fbc2eb, #a6c1ee)',
+  'linear-gradient(135deg, #d4fc79, #96e6a1)',
+];
 
-    <!-- Particle Animation Script -->
-    <script>
-        const particlesContainer = document.getElementById('particles');
-        const particleCount = 50;
+// =================== HELPERS ===================
+const fmt = (n) => n.toLocaleString('th-TH', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+const now = () => {
+  const d = new Date();
+  return d.toLocaleDateString('th-TH', { year:'numeric', month:'long', day:'numeric' }) + ' ' +
+         d.toLocaleTimeString('th-TH', { hour:'2-digit', minute:'2-digit', second:'2-digit' });
+};
 
-        for (let i = 0; i < particleCount; i++) {
-            const particle = document.createElement('div');
-            particle.classList.add('particle');
-            particle.style.left = Math.random() * 100 + '%';
-            particle.style.width = Math.random() * 4 + 2 + 'px';
-            particle.style.height = particle.style.width;
-            particle.style.animationDuration = Math.random() * 10 + 8 + 's';
-            particle.style.animationDelay = Math.random() * 10 + 's';
-            particlesContainer.appendChild(particle);
-        }
-    </script>
+// =================== APP ===================
+function App() {
+  const [products, setProducts] = useState(INITIAL_PRODUCTS);
+  const [cart, setCart] = useState([]);
+  const [drawerOpen, setDrawerOpen] = useState(false);
+  const [checkoutOpen, setCheckoutOpen] = useState(false);
+  const [receiptOpen, setReceiptOpen] = useState(false);
+  const [discountInput, setDiscountInput] = useState('');
+  const [appliedDiscount, setAppliedDiscount] = useState(null);
+  const [paymentInput, setPaymentInput] = useState('');
+  const [lastReceipt, setLastReceipt] = useState(null);
+  const [snack, setSnack] = useState({ open: false, msg: '', severity: 'success' });
+
+  const showSnack = (msg, severity = 'success') => setSnack({ open: true, msg, severity });
+
+  // --- Cart helpers ---
+  const cartCount = useMemo(() => cart.reduce((s, c) => s + c.qty, 0), [cart]);
+
+  const addToCart = useCallback((product) => {
+    if (!product.active) return showSnack('สินค้านี้ปิดการขายอยู่', 'warning');
+    const inCart = cart.find(c => c.id === product.id);
+    const currentQty = inCart ? inCart.qty : 0;
+    if (currentQty >= product.stock) return showSnack('สต็อกไม่เพียงพอ!', 'error');
+    setCart(prev => {
+      const exist = prev.find(c => c.id === product.id);
+      if (exist) return prev.map(c => c.id === product.id ? { ...c, qty: c.qty + 1 } : c);
+      return [...prev, { id: product.id, name: product.name, price: product.price, qty: 1 }];
+    });
+    showSnack(`เพิ่ม "${product.name}" ลงตะกร้าแล้ว ✓`);
+  }, [cart]);
+
+  const updateQty = useCallback((id, delta) => {
+    setCart(prev => {
+      const item = prev.find(c => c.id === id);
+      if (!item) return prev;
+      const product = products.find(p => p.id === id);
+      const newQty = item.qty + delta;
+      if (newQty <= 0) return prev.filter(c => c.id !== id);
+      if (newQty > product.stock) { showSnack('เกินจำนวนสต็อก!', 'error'); return prev; }
+      return prev.map(c => c.id === id ? { ...c, qty: newQty } : c);
+    });
+  }, [products]);
+
+  const removeItem = useCallback((id) => {
+    setCart(prev => prev.filter(c => c.id !== id));
+    showSnack('ลบรายการออกจากตะกร้าแล้ว', 'info');
+  }, []);
+
+  // --- Toggle product status ---
+  const toggleActive = useCallback((id) => {
+    setProducts(prev => prev.map(p => {
+      if (p.id !== id) return p;
+      const next = !p.active;
+      showSnack(next ? `เปิดขาย "${p.name}"` : `ปิดขาย "${p.name}"`, next ? 'success' : 'warning');
+      return { ...p, active: next };
+    }));
+  }, []);
+
+  // --- Calculations ---
+  const subtotal = useMemo(() => cart.reduce((s, c) => s + c.price * c.qty, 0), [cart]);
+  const discountPercent = appliedDiscount ? appliedDiscount.percent : 0;
+  const discountAmount = subtotal * discountPercent / 100;
+  const afterDiscount = subtotal - discountAmount;
+  const vat = afterDiscount * 0.07;
+  const total = afterDiscount + vat;
+  const payment = parseFloat(paymentInput) || 0;
+  const change = payment - total;
+
+  // --- Discount ---
+  const applyDiscount = () => {
+    const code = discountInput.trim().toUpperCase();
+    if (DISCOUNT_CODES[code]) {
+      setAppliedDiscount(DISCOUNT_CODES[code]);
+      showSnack(`ใช้โค้ด "${code}" สำเร็จ — ${DISCOUNT_CODES[code].label}`, 'success');
+    } else {
+      showSnack('โค้ดส่วนลดไม่ถูกต้อง', 'error');
+    }
+  };
+
+  // --- Checkout ---
+  const handleCheckout = () => {
+    if (cart.length === 0) return showSnack('ตะกร้าว่างเปล่า!', 'warning');
+    setCheckoutOpen(true);
+  };
+
+  const confirmPayment = () => {
+    if (payment < total) return showSnack('จำนวนเงินไม่เพียงพอ!', 'error');
+    // Deduct stock
+    setProducts(prev => prev.map(p => {
+      const item = cart.find(c => c.id === p.id);
+      return item ? { ...p, stock: p.stock - item.qty } : p;
+    }));
+    // Build receipt
+    setLastReceipt({
+      items: [...cart],
+      subtotal, discountPercent, discountAmount,
+      afterDiscount, vat, total, payment, change,
+      timestamp: now(),
+      receiptNo: 'RCP-' + Date.now().toString(36).toUpperCase(),
+    });
+    setCart([]);
+    setAppliedDiscount(null);
+    setDiscountInput('');
+    setPaymentInput('');
+    setCheckoutOpen(false);
+    setDrawerOpen(false);
+    setReceiptOpen(true);
+    showSnack('ชำระเงินสำเร็จ! 🎉');
+  };
+
+  // =================== RENDER ===================
+  return (
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+
+      {/* ===== APPBAR ===== */}
+      <AppBar position="sticky" elevation={2} sx={{ background: 'linear-gradient(90deg, #1565c0, #0d47a1)' }}>
+        <Toolbar>
+          <Typography variant="h6" sx={{ flexGrow: 1, fontWeight: 700, letterSpacing: 1 }}>
+            🏪 ระบบ POS — คลังสินค้าหน้าร้าน
+          </Typography>
+          <Tooltip title="ตะกร้าสินค้า">
+            <IconButton color="inherit" onClick={() => setDrawerOpen(true)} sx={{ fontSize: '1.5rem' }}>
+              <Badge badgeContent={cartCount} color="error" showZero>
+                🛒
+              </Badge>
+            </IconButton>
+          </Tooltip>
+        </Toolbar>
+      </AppBar>
+
+      <Container maxWidth="lg" sx={{ py: 4 }}>
+        {/* ===== PRODUCT GRID ===== */}
+        <Typography variant="h5" sx={{ mb: 3, fontWeight: 600, color: '#1565c0' }}>
+          📦 รายการสินค้า ({products.filter(p => p.active).length} รายการเปิดขาย)
+        </Typography>
+        <Grid container spacing={3}>
+          {products.map((p, i) => {
+            const stockPct = (p.stock / p.maxStock) * 100;
+            const lowStock = p.stock < 5;
+            const outOfStock = p.stock === 0;
+            return (
+              <Grid item xs={12} sm={6} md={4} lg={3} key={p.id}>
+                <Card
+                  className="fade-in"
+                  elevation={3}
+                  sx={{
+                    opacity: p.active ? 1 : 0.5,
+                    transition: 'all 0.3s',
+                    '&:hover': { transform: p.active ? 'translateY(-4px)' : 'none', boxShadow: p.active ? 8 : 3 },
+                    position: 'relative', overflow: 'visible',
+                  }}
+                >
+                  {/* Low stock badge */}
+                  {lowStock && p.stock > 0 && (
+                    <Chip label="⚠️ ใกล้หมด" color="error" size="small"
+                      className="low-stock-pulse"
+                      sx={{ position: 'absolute', top: -10, right: -6, zIndex: 2, fontWeight: 600 }} />
+                  )}
+                  {outOfStock && (
+                    <Chip label="❌ หมด" color="default" size="small"
+                      sx={{ position: 'absolute', top: -10, right: -6, zIndex: 2, fontWeight: 600 }} />
+                  )}
+
+                  {/* CardMedia (emoji) */}
+                  <Box className="emoji-media" sx={{ background: GRADIENTS[i % GRADIENTS.length], borderRadius: '12px 12px 0 0' }}>
+                    {p.emoji}
+                  </Box>
+
+                  <CardContent sx={{ pb: 1 }}>
+                    <Typography variant="subtitle1" sx={{ fontWeight: 600, lineHeight: 1.3, minHeight: 42 }}>
+                      {p.name}
+                    </Typography>
+                    <Stack direction="row" spacing={1} alignItems="center" sx={{ mt: 1 }}>
+                      <Chip label={p.category} size="small" variant="outlined" color="primary" />
+                      <Typography variant="h6" color="secondary" sx={{ fontWeight: 700, ml: 'auto !important' }}>
+                        ฿{fmt(p.price)}
+                      </Typography>
+                    </Stack>
+
+                    {/* Stock LinearProgress */}
+                    <Box sx={{ mt: 1.5 }}>
+                      <Stack direction="row" justifyContent="space-between" sx={{ mb: 0.5 }}>
+                        <Typography variant="caption" color="text.secondary">สต็อก</Typography>
+                        <Typography variant="caption" sx={{ fontWeight: 600, color: lowStock ? 'error.main' : 'text.primary' }}>
+                          {p.stock} / {p.maxStock} ชิ้น
+                        </Typography>
+                      </Stack>
+                      <LinearProgress
+                        variant="determinate"
+                        value={stockPct}
+                        color={outOfStock ? 'inherit' : lowStock ? 'error' : stockPct < 40 ? 'warning' : 'success'}
+                        sx={{ height: 8, borderRadius: 4 }}
+                      />
+                    </Box>
+                  </CardContent>
+
+                  <CardActions sx={{ px: 2, pb: 2, justifyContent: 'space-between' }}>
+                    {/* Switch */}
+                    <FormControlLabel
+                      control={<Switch checked={p.active} onChange={() => toggleActive(p.id)} size="small" />}
+                      label={<Typography variant="caption">{p.active ? 'เปิดขาย' : 'ปิด'}</Typography>}
+                    />
+                    {/* Add to cart button */}
+                    <Button
+                      variant="contained" size="small"
+                      disabled={!p.active || outOfStock}
+                      onClick={() => addToCart(p)}
+                      sx={{ borderRadius: 8, textTransform: 'none', fontWeight: 600 }}
+                    >
+                      🛒 เพิ่ม
+                    </Button>
+                  </CardActions>
+                </Card>
+              </Grid>
+            );
+          })}
+        </Grid>
+      </Container>
+
+      {/* ===== CART DRAWER ===== */}
+      <Drawer anchor="right" open={drawerOpen} onClose={() => setDrawerOpen(false)}
+        PaperProps={{ sx: { width: { xs: '100%', sm: 420 }, p: 0 } }}>
+        <Box sx={{ p: 3, background: 'linear-gradient(90deg, #1565c0, #0d47a1)', color: '#fff' }}>
+          <Typography variant="h6" sx={{ fontWeight: 700 }}>🛒 ตะกร้าสินค้า ({cartCount} รายการ)</Typography>
+        </Box>
+        {cart.length === 0 ? (
+          <Box sx={{ p: 4, textAlign: 'center' }}>
+            <Typography sx={{ fontSize: '4rem' }}>🛒</Typography>
+            <Typography color="text.secondary" sx={{ mt: 1 }}>ตะกร้าว่างเปล่า</Typography>
+          </Box>
+        ) : (
+          <Box sx={{ flex: 1, overflow: 'auto' }}>
+            <TableContainer>
+              <Table size="small">
+                <TableHead>
+                  <TableRow sx={{ background: '#f5f5f5' }}>
+                    <TableCell sx={{ fontWeight: 600 }}>สินค้า</TableCell>
+                    <TableCell align="center" sx={{ fontWeight: 600 }}>จำนวน</TableCell>
+                    <TableCell align="right" sx={{ fontWeight: 600 }}>รวม</TableCell>
+                    <TableCell align="center" sx={{ fontWeight: 600 }}>ลบ</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {cart.map(item => (
+                    <TableRow key={item.id}>
+                      <TableCell>
+                        <Typography variant="body2" sx={{ fontWeight: 500 }}>{item.name}</Typography>
+                        <Typography variant="caption" color="text.secondary">฿{fmt(item.price)}/ชิ้น</Typography>
+                      </TableCell>
+                      <TableCell align="center">
+                        <Stack direction="row" alignItems="center" justifyContent="center" spacing={0.5}>
+                          <IconButton size="small" onClick={() => updateQty(item.id, -1)}
+                            sx={{ width: 28, height: 28, fontSize: '1rem', border: '1px solid #ddd' }}>➖</IconButton>
+                          <Typography sx={{ minWidth: 24, textAlign: 'center', fontWeight: 600 }}>{item.qty}</Typography>
+                          <IconButton size="small" onClick={() => updateQty(item.id, 1)}
+                            sx={{ width: 28, height: 28, fontSize: '1rem', border: '1px solid #ddd' }}>➕</IconButton>
+                        </Stack>
+                      </TableCell>
+                      <TableCell align="right">
+                        <Typography sx={{ fontWeight: 600, color: '#ff6f00' }}>฿{fmt(item.price * item.qty)}</Typography>
+                      </TableCell>
+                      <TableCell align="center">
+                        <IconButton size="small" color="error" onClick={() => removeItem(item.id)} sx={{ fontSize: '1.1rem' }}>🗑️</IconButton>
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </TableContainer>
+            <Divider />
+            <Box sx={{ p: 2 }}>
+              <Stack direction="row" justifyContent="space-between" sx={{ mb: 2 }}>
+                <Typography variant="h6" sx={{ fontWeight: 600 }}>รวม:</Typography>
+                <Typography variant="h6" sx={{ fontWeight: 700, color: '#ff6f00' }}>฿{fmt(subtotal)}</Typography>
+              </Stack>
+              <Button variant="contained" fullWidth size="large" onClick={handleCheckout}
+                sx={{ py: 1.5, fontWeight: 700, fontSize: '1.1rem', textTransform: 'none', borderRadius: 3 }}>
+                💳 ชำระเงิน
+              </Button>
+            </Box>
+          </Box>
+        )}
+      </Drawer>
+
+      {/* ===== CHECKOUT DIALOG ===== */}
+      <Dialog open={checkoutOpen} onClose={() => setCheckoutOpen(false)} maxWidth="sm" fullWidth>
+        <DialogTitle sx={{ fontWeight: 700, background: '#f5f5f5' }}>💳 ชำระเงิน</DialogTitle>
+        <DialogContent sx={{ pt: '20px !important' }}>
+          {/* Order summary table */}
+          <TableContainer component={Paper} variant="outlined" sx={{ mb: 3 }}>
+            <Table size="small">
+              <TableHead>
+                <TableRow sx={{ background: '#fafafa' }}>
+                  <TableCell sx={{ fontWeight: 600 }}>รายการ</TableCell>
+                  <TableCell align="center" sx={{ fontWeight: 600 }}>จำนวน</TableCell>
+                  <TableCell align="right" sx={{ fontWeight: 600 }}>ราคา</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {cart.map(item => (
+                  <TableRow key={item.id}>
+                    <TableCell>{item.name}</TableCell>
+                    <TableCell align="center">{item.qty}</TableCell>
+                    <TableCell align="right">฿{fmt(item.price * item.qty)}</TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
+
+          {/* Discount code */}
+          <Stack direction="row" spacing={1} sx={{ mb: 3 }}>
+            <TextField label="โค้ดส่วนลด" size="small" value={discountInput}
+              onChange={e => setDiscountInput(e.target.value)}
+              placeholder="เช่น SALE10, VIP20" fullWidth />
+            <Button variant="outlined" onClick={applyDiscount} sx={{ minWidth: 100, textTransform: 'none', fontWeight: 600 }}>
+              ใช้โค้ด
+            </Button>
+          </Stack>
+          {appliedDiscount && (
+            <Chip label={`✅ ${appliedDiscount.label}`} color="success" sx={{ mb: 2, fontWeight: 600 }} onDelete={() => { setAppliedDiscount(null); showSnack('ยกเลิกโค้ดส่วนลดแล้ว', 'info'); }} />
+          )}
+
+          {/* Price breakdown */}
+          <Paper variant="outlined" sx={{ p: 2, mb: 3 }}>
+            <Stack spacing={1}>
+              <Stack direction="row" justifyContent="space-between">
+                <Typography>ราคาสินค้ารวม</Typography>
+                <Typography sx={{ fontWeight: 500 }}>฿{fmt(subtotal)}</Typography>
+              </Stack>
+              {appliedDiscount && (
+                <Stack direction="row" justifyContent="space-between" sx={{ color: 'success.main' }}>
+                  <Typography>ส่วนลด ({discountPercent}%)</Typography>
+                  <Typography sx={{ fontWeight: 500 }}>-฿{fmt(discountAmount)}</Typography>
+                </Stack>
+              )}
+              <Stack direction="row" justifyContent="space-between">
+                <Typography>ภาษีมูลค่าเพิ่ม (VAT 7%)</Typography>
+                <Typography sx={{ fontWeight: 500 }}>฿{fmt(vat)}</Typography>
+              </Stack>
+              <Divider />
+              <Stack direction="row" justifyContent="space-between">
+                <Typography variant="h6" sx={{ fontWeight: 700 }}>ยอดรวมสุทธิ</Typography>
+                <Typography variant="h6" sx={{ fontWeight: 700, color: '#d32f2f' }}>฿{fmt(total)}</Typography>
+              </Stack>
+            </Stack>
+          </Paper>
+
+          {/* Payment input */}
+          <TextField label="จำนวนเงินที่รับ (บาท)" type="number" fullWidth value={paymentInput}
+            onChange={e => setPaymentInput(e.target.value)}
+            InputProps={{ style: { fontSize: '1.3rem', fontWeight: 700 } }}
+            sx={{ mb: 2 }} />
+
+          {payment > 0 && (
+            <Paper sx={{ p: 2, background: change >= 0 ? '#e8f5e9' : '#ffebee', textAlign: 'center' }}>
+              <Typography variant="body2" color="text.secondary">เงินทอน</Typography>
+              <Typography variant="h4" sx={{ fontWeight: 800, color: change >= 0 ? '#2e7d32' : '#d32f2f' }}>
+                {change >= 0 ? `฿${fmt(change)}` : `ขาดอีก ฿${fmt(Math.abs(change))}`}
+              </Typography>
+            </Paper>
+          )}
+        </DialogContent>
+        <DialogActions sx={{ p: 2 }}>
+          <Button onClick={() => setCheckoutOpen(false)} sx={{ textTransform: 'none' }}>ยกเลิก</Button>
+          <Button variant="contained" onClick={confirmPayment} disabled={payment < total || cart.length === 0}
+            sx={{ px: 4, fontWeight: 700, textTransform: 'none', borderRadius: 3 }}>
+            ✅ ยืนยันชำระเงิน
+          </Button>
+        </DialogActions>
+      </Dialog>
+
+      {/* ===== RECEIPT DIALOG ===== */}
+      <Dialog open={receiptOpen} onClose={() => setReceiptOpen(false)} maxWidth="xs" fullWidth>
+        <DialogTitle sx={{ fontWeight: 700, textAlign: 'center', background: '#f5f5f5' }}>🧾 ใบเสร็จรับเงิน</DialogTitle>
+        <DialogContent>
+          {lastReceipt && (
+            <Box className="receipt-box" sx={{ mt: 2 }}>
+{`========================================
+       🏪 ร้านค้าปลีก POS Store
+           สาขา หน้าร้าน
+========================================
+ใบเสร็จเลขที่: ${lastReceipt.receiptNo}
+วันที่: ${lastReceipt.timestamp}
+----------------------------------------
+รายการสินค้า:
+${lastReceipt.items.map(it => `  ${it.name}\n    ${it.qty} x ฿${fmt(it.price)} = ฿${fmt(it.price * it.qty)}`).join('\n')}
+----------------------------------------
+ราคารวม:          ฿${fmt(lastReceipt.subtotal)}${lastReceipt.discountPercent > 0 ? `\nส่วนลด (${lastReceipt.discountPercent}%):   -฿${fmt(lastReceipt.discountAmount)}` : ''}
+VAT 7%:            ฿${fmt(lastReceipt.vat)}
+========================================
+ยอดสุทธิ:         ฿${fmt(lastReceipt.total)}
+รับเงิน:          ฿${fmt(lastReceipt.payment)}
+เงินทอน:          ฿${fmt(lastReceipt.change)}
+========================================
+     ขอบคุณที่ใช้บริการ 🙏
+      Thank you! Come again!
+========================================`}
+            </Box>
+          )}
+        </DialogContent>
+        <DialogActions sx={{ p: 2 }}>
+          <Button onClick={() => setReceiptOpen(false)} sx={{ textTransform: 'none' }}>ปิด</Button>
+          <Button variant="contained" onClick={() => { if(lastReceipt) window.print(); }}
+            sx={{ textTransform: 'none', fontWeight: 600 }}>🖨️ พิมพ์ใบเสร็จ</Button>
+        </DialogActions>
+      </Dialog>
+
+      {/* ===== SNACKBAR ===== */}
+      <Snackbar open={snack.open} autoHideDuration={2500} onClose={() => setSnack(s => ({...s, open:false}))}
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}>
+        <Alert severity={snack.severity} variant="filled" onClose={() => setSnack(s => ({...s, open:false}))}
+          sx={{ fontWeight: 500, minWidth: 280 }}>
+          {snack.msg}
+        </Alert>
+      </Snackbar>
+
+      {/* ===== FOOTER ===== */}
+      <Box sx={{ textAlign: 'center', py: 3, color: 'text.secondary' }}>
+        <Typography variant="body2">
+          © 2026 ระบบ POS — Point of Sale & Inventory Management | Built with React & MUI
+        </Typography>
+      </Box>
+    </ThemeProvider>
+  );
+}
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(<App />);
+</script>
 </body>
 </html>
-
